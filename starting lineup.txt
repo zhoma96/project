@@ -1,0 +1,44 @@
+insert INTO team.start_lineup
+VALUES((SELECT 
+player_id FROM team.condition
+WHERE
+player_id IN (SELECT idprofiles FROM team.profiles WHERE position = 'GK')
+ORDER BY training DESC
+LIMIT 1),(SELECT
+position FROM team.profiles
+WHERE
+idprofiles = (SELECT 
+player_id FROM team.condition
+WHERE
+player_id IN (SELECT idprofiles FROM team.profiles WHERE position = 'GK')
+ORDER BY training DESC
+LIMIT 1)));
+SELECT * FROM team.start_lineup;
+-------------------------------------------------------------------------------------
+DEFENCE
+SELECT
+player_id
+FROM team2.condition
+where
+player_id in (SELECT idprofiles FROM team2.profiles where profiles.position = 'DF')
+order by training DESC
+LIMIT 4
+-------------------------------------------------------------------------------------
+MIDFIELD
+SELECT
+player_id
+FROM team2.condition
+where
+player_id in (SELECT idprofiles FROM team2.profiles where profiles.position = 'MF')
+order by training DESC
+LIMIT 3
+-------------------------------------------------------------------------------------
+FORWARD
+SELECT
+player_id
+FROM team2.condition
+where
+player_id in (SELECT idprofiles FROM team2.profiles where profiles.position = 'FW')
+order by training DESC
+LIMIT 3
+-------------------------------------------------------------------------------------
